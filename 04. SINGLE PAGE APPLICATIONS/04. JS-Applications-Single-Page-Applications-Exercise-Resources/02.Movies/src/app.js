@@ -34,10 +34,11 @@ function setupNavigation() {
     document.querySelector('nav').addEventListener('click', (event) => {
         const view = links[event.target.id];
         if (typeof view == 'function') {
+            event.preventDefault();
             view();
         }
     });
-    document.getElementById('createLink').addEventListener('click', (event) =>{
+    document.getElementById('createLink').addEventListener('click', (event) => {
         event.preventDefault();
         showCreate();
     });
