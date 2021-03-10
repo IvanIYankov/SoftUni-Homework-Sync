@@ -17,6 +17,8 @@ function createMoviePreview(movie) {
         <div class="card-footer">
             <button id="${movie._id}" type="button" class="btn btn-info movieDetailsLink">Details</button>
         </div>`;
+
+    return element;
 }
 
 let main;
@@ -26,7 +28,13 @@ let container;
 export function setupHome(mainTarget, sectionTarget) {
     main = mainTarget;
     section = sectionTarget;
-    container = section.querySelector('.card-deck.d-flex.justify-content-center')
+    container = section.querySelector('.card-deck.d-flex.justify-content-center');
+
+    container.addEventListener('click', event => {
+        if (event.target.classList.contains('movieDetailsLink')) {
+            console.log('clicked on movie details: ', event.target.id);
+        }
+    });
 }
 
 export async function showHome() {
