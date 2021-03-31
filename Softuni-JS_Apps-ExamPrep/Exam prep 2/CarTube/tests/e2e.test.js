@@ -3,7 +3,7 @@ const { chromium } = require('playwright-chromium');
 const { expect } = require('chai');
 
 const host = 'http://localhost:3000'; // Application host (NOT service host - that can be anything)
-const DEBUG = false;
+const DEBUG = true;
 const slowMo = 500;
 
 const mockData = require('./mock-data.json');
@@ -420,13 +420,13 @@ describe('E2E tests', function () {
             const { onRequest } = put();
 
             await page.click('text=All Listings');
-            await page.waitForTimeout(100);
+            await page.waitForTimeout(300);
             await page.waitForSelector('#car-listings');
             await page.click('.listing:has-text("brand1") >> text=Details');
-            await page.waitForTimeout(100);
+            await page.waitForTimeout(300);
             await page.waitForSelector('.details-info');
             await page.click('text=Edit');
-            await page.waitForTimeout(100);
+            await page.waitForTimeout(300);
             await page.waitForSelector('form');
 
             await page.fill('[name="brand"]', data.brand + 'edit');
@@ -446,9 +446,9 @@ describe('E2E tests', function () {
             expect(postData.brand).to.contains(data.brand + 'edit');
             expect(postData.model).to.contains(data.model + 'edit');
             expect(postData.description).to.contains(data.description + 'edit');
-            expect(postData.year).to.contains((data.year + 1).toString());
+            expect(postData.year).to.equal(data.year + 1);
             expect(postData.imageUrl).to.contains(data.imageUrl + 'edit');
-            expect(postData.price).to.contains((data.price + 1).toString());
+            expect(postData.price).to.equal(data.price + 1);
         });
     });
 
@@ -458,9 +458,9 @@ describe('E2E tests', function () {
         beforeEach(async () => {
             const data = mockData.users[0];
             await page.goto(host);
-            await page.waitForTimeout(100);
+            await page.waitForTimeout(300);
             await page.click('text=Login');
-            await page.waitForTimeout(100);
+            await page.waitForTimeout(300);
             await page.waitForSelector('form');
             await page.fill('[name="username"]', data.username);
             await page.fill('[name="password"]', data.password);
