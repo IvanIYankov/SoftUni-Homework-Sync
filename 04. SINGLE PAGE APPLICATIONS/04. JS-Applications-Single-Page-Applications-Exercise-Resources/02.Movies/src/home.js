@@ -1,3 +1,5 @@
+import { showDetails } from './details.js';
+
 async function getMovies() {
     const response = await fetch('http://localhost:3030/data/movies');
     const data = await response.json();
@@ -32,7 +34,7 @@ export function setupHome(mainTarget, sectionTarget) {
 
     container.addEventListener('click', event => {
         if (event.target.classList.contains('movieDetailsLink')) {
-            console.log('clicked on movie details: ', event.target.id);
+             showDetails(event.target.id);
         }
     });
 }
@@ -49,5 +51,5 @@ export async function showHome() {
     cards.forEach(c => fragment.appendChild(c));
 
     container.innerHTML = '';
-    container.appendChild(fragment); 
+    container.appendChild(fragment);
 }

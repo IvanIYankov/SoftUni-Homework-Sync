@@ -31,6 +31,18 @@ function setupSection(sectionId, setup) {
 }
 
 function setupNavigation() {
+    const email = sessionStorage.getItem('email');
+    if (email != null) {
+        document.getElementById('welcome-msg').textContent = `Welcome, ${email}`;
+        [...document.querySelectorAll('nav .user')].forEach(l => l.style.display = 'block');
+        [...document.querySelectorAll('nav .guest')].forEach(l => l.style.display = 'none');
+    } else {
+        [...document.querySelectorAll('nav .user')].forEach(l => l.style.display = 'none');
+        [...document.querySelectorAll('nav .guest')].forEach(l => l.style.display = 'block');
+    }
+
+
+
     document.querySelector('nav').addEventListener('click', (event) => {
         const view = links[event.target.id];
         if (typeof view == 'function') {
