@@ -1,0 +1,4 @@
+To do:
+1)Validation-done
+2) Fucking recursion on logout-done
+3)all listings last paragraph-done
